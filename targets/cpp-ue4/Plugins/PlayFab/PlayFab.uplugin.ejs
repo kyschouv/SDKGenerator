@@ -12,11 +12,17 @@
     "Description": "PlayFab Blueprint SDK for Unreal Engine 4. Current API version: <%- sdkVersion %>",
     "MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/217fdf581b784571af03d3fb6580368f",
     "Modules": [
-        {
-            "Name": "PlayFab",
-            "Type": "Runtime",
-            "LoadingPhase": "PreDefault",
-            "WhitelistPlatforms": [ "Win64", "Win32", "Mac", "IOS", "Android" ]
-        }
-    ]
+      {
+        "Name": "PlayFab",
+        "Type": "Runtime",
+        "LoadingPhase": "PreDefault",
+        "WhitelistPlatforms": [ "Win64", "Win32", "Mac", "IOS", "Android" ]
+      },
+      {
+        "Name": "PlayFabBp",
+        "Type": "Runtime",
+        "LoadingPhase": "PreDefault",
+        "WhitelistPlatforms": [ "Win64", "Win32", "Mac", "IOS", "Android" ]
+      }
+  ]
 }

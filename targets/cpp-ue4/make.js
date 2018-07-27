@@ -1,4 +1,5 @@
 var path = require("path");
+var bpBuilder = require("./bpBuilder/bpBuilder.js");
 
 // Making resharper less noisy - These are defined in Generate.js
 if (typeof (generateApiSummaryLines) === "undefined") generateApiSummaryLines = function () { };
@@ -24,6 +25,8 @@ exports.makeCombinedAPI = function (apis, sourceDir, apiOutputDir) {
         sdkVersion: exports.sdkVersion,
         ueTargetVersion: "4.19.0"
     };
+
+    bpBuilder.makeCombinedAPI(apis, path.resolve(sourceDir, "bpBuilder"), apiOutputDir);
 
     var subFolders = ["PlayFabSDK", "ExampleProject"]; // Two copies, one for example project, and one as the raw plugin
     for (var i = 0; i < subFolders.length; i++) {
