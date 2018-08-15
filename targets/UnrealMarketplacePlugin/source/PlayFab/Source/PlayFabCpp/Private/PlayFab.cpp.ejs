@@ -1,0 +1,53 @@
+<%- copyright %>
+
+  #include "PlayFab.h"
+
+  #include "PlayFabSettings.h"
+
+// Api's
+  <% for(var i = 0; i < apis.length; i++) { var api = apis[i];
+%>#include "Core/PlayFab<%- api.name %>API.h"
+<% } %>
+DEFINE_LOG_CATEGORY(LogPlayFab);
+
+class FPlayFabModule : public IPlayFabModuleInterface
+{
+    /** IModuleInterface implementation */
+    virtual void StartupModule() override;
+    virtual void ShutdownModule() override;
+
+    FString GetTitleId() const override { return PlayFab::PlayFabSettings::GetTitleId(); };
+    
+<% for(var i = 0; i < apis.length; i++) { var api = apis[i];
+%>    PlayFab<%- api.name %>Ptr Get<%- api.name %>API() const override { return <%- api.name %>API; };
+<% } %>
+<% for(var i = 0; i < apis.length; i++) { var api = apis[i];
+%>    PlayFab<%- api.name %>Ptr <%- api.name %>API;
+<% } %>
+
+};
+
+void FPlayFabModule::StartupModule()
+{
+    // create the API
+    ClientAPI = MakeShareable(new PlayFab::UPlayFabClientAPI());
+    AuthenticationAPI = MakeShareable(new PlayFab::UPlayFabAuthenticationAPI());
+    CloudScriptAPI = MakeShareable(new PlayFab::UPlayFabCloudScriptAPI());
+    DataAPI = MakeShareable(new PlayFab::UPlayFabDataAPI());
+    EventsAPI = MakeShareable(new PlayFab::UPlayFabEventsAPI());
+    GroupsAPI = MakeShareable(new PlayFab::UPlayFabGroupsAPI());
+    ProfilesAPI = MakeShareable(new PlayFab::UPlayFabProfilesAPI());
+
+#if WITH_SERVER_CODE
+    ServerAPI = MakeShareable(new PlayFab::UPlayFabServerAPI());
+    MatchmakerAPI = MakeShareable(new PlayFab::UPlayFabMatchmakerAPI());
+    AdminAPI = MakeShareable(new PlayFab::UPlayFabAdminAPI());
+#endif
+}
+
+void FPlayFabModule::ShutdownModule()
+{
+    
+}
+
+IMPLEMENT_MODULE(FPlayFabModule, PlayFabCpp)
