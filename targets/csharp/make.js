@@ -42,7 +42,6 @@ exports.makeCombinedAPI = function (apis, sourceDir, apiOutputDir) {
         makeApi(apis[i], sourceDir, apiOutputDir);
     generateSimpleFiles(apis, sourceDir, apiOutputDir);
     generateProject(apis, sourceDir, apiOutputDir, "All", ";ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API");
-    generateNugetTemplate(sourceDir, apiOutputDir);
 }
 
 function getBaseTypeSyntax(datatype) {
@@ -139,6 +138,7 @@ function generateProject(apis, sourceDir, apiOutputDir, libname, extraDefines) {
     var projLocals = {
         apis: apis,
         libname: libname,
+<<<<<<< HEAD
         extraDefines: ";NETFX_CORE;SIMPLE_JSON_TYPEINFO" + extraDefines
     };
 
@@ -148,13 +148,21 @@ function generateProject(apis, sourceDir, apiOutputDir, libname, extraDefines) {
 
 function generateNugetTemplate(sourceDir, apiOutputDir) {
     var projLocals = {
+=======
+        extraDefines: ";NETFX_CORE;SIMPLE_JSON_TYPEINFO" + extraDefines,
+>>>>>>> 36087949f792da99fe69825063b6780086f403a1
         sdkVersion: sdkGlobals.sdkVersion,
         sdkDate: sdkGlobals.sdkVersion.split(".")[2],
         sdkYear: sdkGlobals.sdkVersion.split(".")[2].substr(0, 2)
     };
 
+<<<<<<< HEAD
     var vcProjTemplate = getCompiledTemplate(path.resolve(sourceDir, "templates/PlayFabSDK.nuspec.ejs"));
     writeFile(path.resolve(apiOutputDir, "source/PlayFabSDK.nuspec"), vcProjTemplate(projLocals));
+=======
+    var vcProjTemplate = getCompiledTemplate(path.resolve(sourceDir, "templates/PlayFabSDK.csproj.ejs"));
+    writeFile(path.resolve(apiOutputDir, "source/PlayFabSDK.csproj"), vcProjTemplate(projLocals));
+>>>>>>> 36087949f792da99fe69825063b6780086f403a1
 }
 
 function getVerticalNameDefault() {

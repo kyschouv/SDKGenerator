@@ -17,7 +17,7 @@ function makeApiIntermal(apis, copyright, sourceDir, apiOutputDir, libName, ueTa
         apis: apis,
         copyright: copyright,
         buildIdentifier: buildIdentifier,
-        
+
         generateApiSummary: generateApiSummary,
         getDataTypeSafeName: getDataTypeSafeName,
         hasClientOptions: authMechanisms.includes("SessionTicket"),
